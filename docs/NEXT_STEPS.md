@@ -56,6 +56,16 @@ Sắp xếp theo mức độ ưu tiên. Xem bối cảnh kỹ thuật đầy đ�
 13. **Quản lý user admin qua UI**
     Hiện việc vô hiệu hoá tài khoản (`is_active`) hay xem danh sách admin phải thao tác trực tiếp DB. Có thể thêm trang quản trị cho superadmin.
 
+## Sau khi hoàn tất kiểm thử (test xong hết các mục trên)
+
+14. **Đồng bộ với API HRM (va-hrm)** _(đã yêu cầu bổ sung — 2026-09-17, cố ý làm sau cùng)_
+    Mục tiêu: liên kết dữ liệu người đăng ký/duyệt booking với hệ thống nhân sự nội bộ **va-hrm** (vd. đối chiếu đơn vị/phòng ban, chức danh người đăng ký, hoặc đồng bộ danh sách nhân viên để tự động điền `org`/`contact` thay vì nhập tay).
+    Điều kiện tiên quyết trước khi bắt đầu: **toàn bộ các mục ưu tiên cao/trung bình ở trên đã được test kỹ** (đặc biệt mục 1 enforce phân quyền, mục 6 test tự động) — vì tích hợp thêm một hệ thống ngoài trong lúc nền tảng auth/booking chưa vững sẽ khó debug khi có lỗi (không rõ lỗi do va-ebr hay do phía HRM).
+    Việc cần làm khi tới lượt:
+    - Xác định hợp đồng API phía `va-hrm` cung cấp (REST? GraphQL? xác thực bằng gì — API key, OAuth service-to-service?) — chưa có thông tin cụ thể tại thời điểm ghi chú này, cần khảo sát repo `va-hrm` trước khi thiết kế.
+    - Quyết định chiều đồng bộ: chỉ đọc (HRM → EBR để autofill thông tin người đăng ký) hay ghi ngược lại (EBR → HRM để log việc dùng phòng vào hồ sơ đơn vị).
+    - Nếu cần gọi API HRM theo lịch, cân nhắc cùng cơ chế job/queue đã đề xuất cho Google Calendar sync (mục 5) thay vì tạo 2 cơ chế nền riêng biệt.
+
 ## Ghi chú vận hành khi phát triển tiếp
 
 - Khi thêm route mới cần xác thực, luôn dùng middleware `requireAuth` (`server/src/middleware/requireAuth.ts`) làm chuẩn.

@@ -49,4 +49,5 @@ Cập nhật lần cuối: 2026-09-17
 - [ ] Chống trùng lịch (double-booking) và race condition khi sinh mã booking
 - [ ] Gửi email thật khi duyệt/từ chối (hiện chỉ có toast nói đã gửi)
 - [ ] Đồng bộ 2 chiều với Google Calendar (yêu cầu bổ sung 2026-09-17 — chưa bắt đầu triển khai, xem NEXT_STEPS.md mục 5)
+- [ ] Đồng bộ với API HRM (va-hrm) — yêu cầu bổ sung 2026-09-17, **cố ý để sau cùng, chỉ làm sau khi test xong hết các mục còn lại** (xem NEXT_STEPS.md mục 14)
 - [ ] Deploy production (hiện chỉ chạy local qua ServBay)
