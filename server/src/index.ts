@@ -1,0 +1,26 @@
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import { config } from "./config.js";
+import { authRouter } from "./routes/auth.js";
+import { bookingsRouter } from "./routes/bookings.js";
+
+const app = express();
+
+app.use(
+  cors({
+    origin: config.frontendUrl,
+    credentials: true,
+  }),
+);
+app.use(express.json());
+app.use(cookieParser());
+
+app.get("/health", (_req, res) => res.json({ ok: true }));
+
+app.use(authRouter);
+app.use(bookingsRouter);
+
+app.listen(config.port, () => {
+  console.log(`[va-ebr-server] listening on http://localhost:${config.port}`);
+});

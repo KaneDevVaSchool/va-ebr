@@ -1,0 +1,213 @@
+/* Trang login luôn sáng/đỏ cố định bất kể theme hệ thống: dùng hằng số màu
+   cục bộ (--login-tri-thuc) thay vì token --tri-thuc dùng chung, vì token đó
+   đổi thành hồng nhạt ở dark mode (xem tokens.css) - card trắng phía dưới
+   cũng không đổi theo dark mode nên nền phải giữ nguyên đỏ đậm để đồng bộ. */
+.admin-login {
+  --login-tri-thuc: #9a0036;
+
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  background: var(--login-tri-thuc);
+  overflow: hidden;
+  font-family: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* app.css đặt ::selection nền hồng nhạt cho toàn app - trên nền đỏ đậm cố
+   định của trang login, chữ trắng bôi chọn theo màu đó gần như không thấy
+   được, nên override riêng thành nền trắng/chữ đen cho khu vực này. */
+.admin-login ::selection {
+  background: #ffffff;
+  color: #1a1a1a;
+}
+
+/* Watermark: PNG tối trên nền trong suốt -> invert thành họa tiết sáng trên
+   nền brand. KHÔNG hạ opacity: độ mờ đến từ chính ảnh nguồn, giảm thêm là
+   mất họa tiết (xem admin.css của va-pictures, bố cục port 1-1 từ đó). */
+.admin-login-watermark {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.05);
+  filter: brightness(0) invert(1) contrast(1.5);
+  pointer-events: none;
+}
+
+.admin-login-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--login-tri-thuc) 5%, transparent),
+    transparent,
+    color-mix(in srgb, var(--login-tri-thuc) 25%, transparent)
+  );
+  pointer-events: none;
+}
+
+.admin-login-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 32rem;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: admin-login-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes admin-login-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-login-container {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.admin-login-header {
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.admin-login-logo {
+  display: block;
+  width: 100%;
+  max-width: min(100%, 300px);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 20px -8px rgba(36, 20, 23, 0.18));
+  margin: 0 auto;
+}
+
+.admin-login-app-name {
+  margin: 1rem 0 0;
+  color: #ffffff;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .admin-login-app-name {
+    font-size: 1.75rem;
+  }
+}
+
+.admin-login-card {
+  width: 100%;
+  max-width: 28rem;
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.35);
+  padding: 2.5rem 2rem;
+  text-align: center;
+}
+
+.admin-login-card h1 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.admin-login-card p {
+  margin: 1rem auto 0;
+  max-width: 20rem;
+  color: #6b6b6f;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.admin-login-error {
+  margin-top: 1rem;
+  background: var(--ban-linh-wash);
+  color: var(--ban-linh);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.admin-login-actions {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-login-google-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border: 1px solid #e5e5e8;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 20px -8px rgba(36, 20, 23, 0.18);
+  cursor: pointer;
+  transition: box-shadow 0.15s ease;
+}
+.admin-login-google-btn:hover {
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.35);
+}
+
+.admin-login-google-icon {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+}
+
+@media (max-width: 480px) {
+  .admin-login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .admin-login-logo {
+    max-width: 240px;
+  }
+}
+
+@media (min-width: 768px) {
+  .admin-login-card {
+    padding: 3rem 2.5rem;
+  }
+
+  .admin-login-logo {
+    max-width: 320px;
+  }
+
+  .admin-login-google-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+.auth-loading {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-soft);
+  font-size: 13px;
+}

@@ -1,0 +1,56 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap");
+
+:root {
+  /* 5 màu giá trị cốt lõi VASchools */
+  --tri-thuc: #9a0036; /* maroon — primary / CTA */
+  --tri-thuc-ink: #7a002b;
+  --tri-thuc-wash: #fbe6ec;
+  --khai-phong: #1750b5; /* blue — đã duyệt / lịch */
+  --khai-phong-wash: #eaf1fb;
+  --trach-nhiem: #a67f42; /* gold — chờ duyệt */
+  --trach-nhiem-wash: #faf3e3;
+  --nhan-ai: #009082; /* teal — thành công / liên hệ */
+  --nhan-ai-wash: #e6f5f3;
+  --ban-linh: #725139; /* brown — neutral / từ chối tint */
+  --ban-linh-wash: #f6f1ed;
+
+  --ink: #241417;
+  --ink-soft: #6b5a5d;
+  --paper: #ffffff;
+  --surface: #ffffff;
+  --surface-muted: #ffffff;
+  --line: #ece5e2;
+  --line-strong: #d8cdc9;
+  --focus: #9a0036;
+  --shadow-sm:
+    0 1px 2px rgba(36, 20, 23, 0.05),
+    0 1px 1px rgba(36, 20, 23, 0.04);
+  --shadow-md: 0 6px 20px -8px rgba(36, 20, 23, 0.18);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+}
+
+:root[data-theme="dark"] {
+  --tri-thuc: #ef98ae;
+  --tri-thuc-ink: #f6b9c8;
+  --tri-thuc-wash: #3a1420;
+  --khai-phong: #9cbdf0;
+  --khai-phong-wash: #182742;
+  --trach-nhiem: #e0b968;
+  --trach-nhiem-wash: #332612;
+  --nhan-ai: #6fd0c4;
+  --nhan-ai-wash: #0f2b28;
+  --ban-linh: #c9ab92;
+  --ban-linh-wash: #2a211b;
+  --ink: #f3ece9;
+  --ink-soft: #b9a9ac;
+  --paper: #1a1315;
+  --surface: #221a1c;
+  --surface-muted: #251d1f;
+  --line: #3a2d30;
+  --line-strong: #4d3c3f;
+  --focus: #ef98ae;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 10px 28px -10px rgba(0, 0, 0, 0.55);
+}
